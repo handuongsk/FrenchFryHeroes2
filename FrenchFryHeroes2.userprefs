@@ -1,0 +1,15 @@
+﻿<Properties>
+  <MonoDevelop.Ide.Workspace ActiveConfiguration="Debug" PreferredExecutionTarget="MonoDevelop.Default" />
+  <MonoDevelop.Ide.Workbench ActiveDocument="Assets\Scripts\ENEMIES\Enemy.cs">
+    <Files>
+      <File FileName="Assets\Scripts\ENEMIES\Zombie.cs" Line="15" Column="35" />
+      <File FileName="Assets\Scripts\ENEMIES\Enemy.cs" Line="46" Column="2" />
+      <File FileName="Assets\Scripts\Turret.cs" Line="36" Column="4" />
+      <File FileName="Assets\Scripts\Shooter.cs" Line="12" Column="34" />
+    </Files>
+  </MonoDevelop.Ide.Workbench>
+  <MonoDevelop.Ide.DebuggingService.Breakpoints>
+    <BreakpointStore />
+  </MonoDevelop.Ide.DebuggingService.Breakpoints>
+  <MonoDevelop.Ide.DebuggingService.PinnedWatches />
+</Properties>

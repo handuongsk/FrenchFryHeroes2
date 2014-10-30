@@ -7,12 +7,12 @@ public class BulletPool : ScriptableObject {
 	private List<BulletController> bullet;
 	private uint size;
 
-	public void Initialize(int size, GameObject bulletPrefab, float bulletSpeed){
+	public void Initialize(int size, GameObject bulletPrefab, float bulletDamage, float bulletKnockback, float bulletSpeed){
 		bullet = new List<BulletController>();
 		for (uint bulletIndex = 0; bulletIndex < size; bulletIndex++) {
 			GameObject freshBullet = Instantiate(bulletPrefab, Vector3.zero, Quaternion.identity) as GameObject;
 			BulletController bulletController = freshBullet.GetComponent<BulletController>();
-			bulletController.SetSpeed(bulletSpeed);
+			bulletController.Initialize(bulletDamage, bulletKnockback, bulletSpeed);
 			bullet.Add(bulletController);
 		}// for (uint bulletIndex = 0; bulletIndex < size; bulletIndex++)
 		this.size = (uint)size;

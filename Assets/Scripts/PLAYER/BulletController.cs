@@ -4,6 +4,8 @@ using System.Collections;
 public class BulletController : MonoBehaviour {
 	// Private fields
 	private bool isActive;
+	private float damage;
+	private float knockback;
 	private float moveSpeed;
 
 	protected void Start () {
@@ -16,21 +18,22 @@ public class BulletController : MonoBehaviour {
 
 	public void Activate(Vector3 startingPosition, Vector3 targetPosition) {
 		transform.position = startingPosition;
-		Vector3 target = (targetPosition - startingPosition);
-		Vector2 speed = new Vector2 (target.x, target.y);
+		Vector3 difference = targetPosition - transform.position;
+		difference.Normalize();
+
+		/*Set bullet speed*/
+		Vector2 speed = new Vector2 (difference.x, difference.y);
 		rigidbody2D.velocity = speed.normalized * moveSpeed;
-		
-		float targetAngle = Mathf.Atan2 (targetPosition.y, targetPosition.x) * Mathf.Rad2Deg;
-		transform.rotation = Quaternion.Euler (0, 0, targetAngle - 90);
+
+		/*Set bullet rotation*/
+		float rotZ = Mathf.Atan2(difference.y, difference.x) * Mathf.Rad2Deg;
+		transform.rotation = Quaternion.Euler(0, 0, rotZ-90);
 
 		isActive = true;
 		renderer.enabled = true;
 	}// public void ActivateBullet(Vector3 startingPosition, Vector3 targetPosition)
 
-	public void OnBecameInvisible() {
-		//Debug.Log ("I am disabled!");
-		Deactivate();
-	}// public void OnBecameInvisible()
+
 
 	public void Deactivate() {
 		isActive = false;
@@ -38,11 +41,27 @@ public class BulletController : MonoBehaviour {
 		rigidbody2D.velocity = Vector2.zero;
 	}// public DeactivateBullet(
 
+	public float Damage {
+		get {return damage;}
+	}
+
+
 	public bool IsActive { 
 		get {return isActive;}
 	}// public bool IsActive{
 
-	public void SetSpeed(float speed) {
+	public void Initialize(float damage, float knockback, float speed) {
+		this.damage = damage;
+		this.knockback = knockback;
 		moveSpeed = speed;
 	}// public void SetSpeed(float speed)
+
+	public float Knockback {
+		get {return knockback;}
+	}
+
+	public void OnBecameInvisible() {
+		//Debug.Log ("I am disabled!");
+		Deactivate();
+	}// public void OnBecameInvisible()
 } //public class BulletController : MonoBehaviour {
