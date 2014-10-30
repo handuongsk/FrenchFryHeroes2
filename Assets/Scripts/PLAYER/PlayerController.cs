@@ -31,7 +31,7 @@ public class PlayerController : MonoBehaviour {
 
 	void HandleAnimation()
 	{
-		Animator anim = GetComponent<Animator> ();
+		//Animator anim = GetComponent<Animator> ();
 		// anim.SetBool ("IsMoving", rigidbody2D.velocity != Vector2.zero);
 	}
 

@@ -5,19 +5,19 @@ public class Turret : MonoBehaviour {
 
 	public float minDistance;
 	public float scanFrequency;
-	public GameObject target;
+	public Enemy target;
 	private GameObject[] allEnemies;
 
 	void Awake()
 	{
 		InvokeRepeating("ScanSurround", 0, scanFrequency);
-
 	}
 
 	void FixedUpdate()
 	{
 		HandleRotation ();
 	}
+
 	void HandleRotation()
 	{
 		if (target != null) {
@@ -28,19 +28,22 @@ public class Turret : MonoBehaviour {
 			transform.eulerAngles = new Vector3 (0, 0, rotz);
 		}
 	}
+
 	void ScanSurround()
 	{
-
 		allEnemies = GameObject.FindGameObjectsWithTag("Enemy");
 		foreach (GameObject enemy in allEnemies)
 		{
-			Vector3 difference = (enemy.transform.position - transform.position);
-			float distance = difference.sqrMagnitude;
-			
-			if (distance <= minDistance)
+			if (enemy.GetComponent<Enemy> ().IsAlive())
 			{
-				target = enemy;
-			}
+				Vector3 difference = (enemy.transform.position - transform.position);
+				float distance = difference.sqrMagnitude;
+				
+				if (distance <= minDistance)
+				{
+					target = enemy.GetComponent<Enemy> ();
+				}
+			} // if (enemy.GetComponent<Enemy> ().IsAlive())
 		}
 	}
 }
