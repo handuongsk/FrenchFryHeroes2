@@ -51,7 +51,9 @@ public class Enemy : MonoBehaviour {
 			Mathf.Rad2Deg - 90;
 		
 		transform.eulerAngles = new Vector3(0, 0, rotz);
-		rigidbody2D.AddForce(gameObject.transform.up * -other.Knockback * 10);
+		rigidbody2D.AddForce(gameObject.transform.up * (-other.Knockback * 10));
+			Debug.Log("knockedback!");
+		
 	} // void Knockback(BulletController other)
 	
 	void OnTriggerEnter2D(Collider2D other)

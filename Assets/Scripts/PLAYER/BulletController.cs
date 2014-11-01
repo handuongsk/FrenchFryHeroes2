@@ -30,6 +30,7 @@ public class BulletController : MonoBehaviour {
 		transform.rotation = Quaternion.Euler(0, 0, rotZ-90);
 
 		isActive = true;
+		GetComponent<CircleCollider2D> ().enabled = true;
 		renderer.enabled = true;
 	}// public void ActivateBullet(Vector3 startingPosition, Vector3 targetPosition)
 
@@ -38,6 +39,7 @@ public class BulletController : MonoBehaviour {
 	public void Deactivate() {
 		isActive = false;
 		renderer.enabled = false;
+		GetComponent<CircleCollider2D> ().enabled = false;
 		rigidbody2D.velocity = Vector2.zero;
 	}// public DeactivateBullet(
 
