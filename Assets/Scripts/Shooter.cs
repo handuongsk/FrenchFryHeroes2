@@ -36,7 +36,7 @@ public class Shooter : MonoBehaviour {
 			bulletPool.ActivateBullet (transform.position, GetComponent<Turret>().target.transform.position );
 			timeSinceLastAttack = 0;
 			numberOfBullets--;
-			Debug.Log("shot!");
+			// Debug.Log("shot!");
 		}// if (Input.GetMouseButtonDown() && timeSinceLastAttack > repeatTime) {
 	}
 

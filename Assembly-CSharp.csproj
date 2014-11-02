@@ -46,10 +46,11 @@
 	</Reference>
   </ItemGroup>
   <ItemGroup>
-     <Compile Include="Assets\Scripts\DetectTile.cs" />
+     <Compile Include="Assets\Scripts\DetectTiles.cs" />
      <Compile Include="Assets\Scripts\ENEMIES\Enemy.cs" />
      <Compile Include="Assets\Scripts\ENEMIES\Zombie.cs" />
      <Compile Include="Assets\Scripts\Game.cs" />
+     <Compile Include="Assets\Scripts\HUD.cs" />
      <Compile Include="Assets\Scripts\PLAYER\BulletController.cs" />
      <Compile Include="Assets\Scripts\PLAYER\BulletPool.cs" />
      <Compile Include="Assets\Scripts\PLAYER\MouseShooter.cs" />
