@@ -15,12 +15,17 @@ public class PlayerController : MonoBehaviour {
 	public GameMode gameMode;
 
 	public enum GameMode {COMBAT, CONSTRUCT}
-	public enum Weapon {Pistol, MachineGun}
+	public enum Weapon {PISTOL, MACHINEGUN}
 
 	void Awake()
 	{
 		gameMode = GameMode.COMBAT;
 	}
+
+    void Update()
+    {
+        HandleInput();
+    }
 
 	void FixedUpdate()
 	{
@@ -52,10 +57,34 @@ public class PlayerController : MonoBehaviour {
 		transform.rotation = Quaternion.Euler(0, 0, rotZ-90);
 	}
 
+    void HandleInput()
+    {
+
+        if (Input.GetKeyDown(KeyCode.Q))
+        {
+            if (CurrentMode == GameMode.COMBAT)
+            {
+                CurrentMode = GameMode.CONSTRUCT;
+                Debug.Log("CONSTRUCT MODE ENABLED");
+            }
+            else
+            {
+                CurrentMode = GameMode.COMBAT;
+                Debug.Log("COMBAT MODE ENABLED");
+            }
+        }
+    }
+
 	public GameMode CurrentMode
 	{
 		get { return gameMode; }
 		set { gameMode = value; }
 	}
+
+    public int Lives { get { return lives; } } 
+    public int Ammo { get { return ammo; } }
+    public int Metal { get { return metal; } }
+    public int Wood { get { return wood; } }
+    public int Copper { get { return copper; } }
 
 }
