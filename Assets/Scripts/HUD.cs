@@ -12,6 +12,7 @@ public class HUD : MonoBehaviour
     private GameObject guiText_wood;
     private GameObject guiText_copper;
 
+    private int displaying_lives;
     public Object lives;
     public Texture2D icon_combat;
     public Texture2D icon_construct;
@@ -36,9 +37,13 @@ public class HUD : MonoBehaviour
     }
     void DisplayHealth()
     {
-        for (int i = 0; i < playerController.Lives; i++)
+        if (playerController.Lives != displaying_lives)
         {
-            Instantiate(lives, new Vector3 ((i-5)*1.2f, 5.5f, 0), Quaternion.identity);
+            for (int i = 0; i < playerController.Lives; i++)
+            {
+                Instantiate(lives, new Vector3((i - 5) * 1.2f, 5.5f, 0), Quaternion.identity);
+            }
+            displaying_lives = playerController.Lives;
         }
     }
     void DisplayMode()

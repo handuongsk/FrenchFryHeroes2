@@ -4,13 +4,17 @@ using System.Collections.Generic;
 
 public class TileGenerator : MonoBehaviour {
 
-	static int gameWidth = 20;
-	static int gameHeight = 15;
-	public Object[] tileType;
 
-	void Start()
+	public Object[] tileType;
+    // public int[,] tileMap;
+    static int gameWidth = 20;
+    static int gameHeight = 15;
+
+	void Awake()
 	{
 		GenerateMap ();
+        // gameWidth = tileMap.GetLength(0);
+        // gameHeight = tileMap.GetLength(1);
 	}
 
 

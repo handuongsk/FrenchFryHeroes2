@@ -25,6 +25,11 @@ public class PlayerController : MonoBehaviour {
     void Update()
     {
         HandleInput();
+        // var x = transform.position.x + 0.5;
+        // var y = transform.position.y + 0.5;
+
+        // Debug.Log("("+(int)x + ", " + (int)y+")");
+
     }
 
 	void FixedUpdate()
@@ -65,15 +70,16 @@ public class PlayerController : MonoBehaviour {
             if (CurrentMode == GameMode.COMBAT)
             {
                 CurrentMode = GameMode.CONSTRUCT;
-                Debug.Log("CONSTRUCT MODE ENABLED");
+                // Debug.Log("CONSTRUCT MODE ENABLED");
             }
             else
             {
                 CurrentMode = GameMode.COMBAT;
-                Debug.Log("COMBAT MODE ENABLED");
+                // Debug.Log("COMBAT MODE ENABLED");
             }
         }
     }
+
 
 	public GameMode CurrentMode
 	{

@@ -52,7 +52,7 @@ public class Enemy : MonoBehaviour {
 		
 		transform.eulerAngles = new Vector3(0, 0, rotz);
 		rigidbody2D.AddForce(gameObject.transform.up * (-other.Knockback * 10));
-			Debug.Log("knockedback!");
+			// Debug.Log("knockedback!");
 		
 	} // void Knockback(BulletController other)
 	
