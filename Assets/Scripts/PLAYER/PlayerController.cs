@@ -78,6 +78,7 @@ public class PlayerController : MonoBehaviour {
                 // Debug.Log("COMBAT MODE ENABLED");
             }
         }
+
     }
 
 

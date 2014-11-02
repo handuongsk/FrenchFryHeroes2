@@ -12,7 +12,8 @@ public class HUD : MonoBehaviour
     private GameObject guiText_wood;
     private GameObject guiText_copper;
 
-    private int displaying_lives;
+    private GameObject[] healthbar;
+    private int health_index;
     public Object lives;
     public Texture2D icon_combat;
     public Texture2D icon_construct;
@@ -26,6 +27,10 @@ public class HUD : MonoBehaviour
         guiText_metal = GameObject.Find("/GUI/gui_ammo/gui_metal/guiText_metal");
         guiText_wood = GameObject.Find("/GUI/gui_ammo/gui_wood/guiText_wood");
         guiText_copper = GameObject.Find("/GUI/gui_ammo/gui_copper/guiText_copper");
+        InitializeHealth();
+        healthbar = GameObject.FindGameObjectsWithTag("Life");
+        health_index = playerController.Lives;
+        Debug.Log(healthbar);
     }
 
 
@@ -34,18 +39,36 @@ public class HUD : MonoBehaviour
         DisplayHealth();
         DisplayMode();
         DisplayResources();
+
     }
-    void DisplayHealth()
+    void InitializeHealth()
     {
-        if (playerController.Lives != displaying_lives)
-        {
-            for (int i = 0; i < playerController.Lives; i++)
-            {
+        // Initialize the healthbar with playerController.Lives number of hearts.
+         for (int i = 0; i < playerController.Lives; i++)
+            { 
                 Instantiate(lives, new Vector3((i - 5) * 1.2f, 5.5f, 0), Quaternion.identity);
             }
-            displaying_lives = playerController.Lives;
+    }
+
+    void DisplayHealth()
+    {
+        // Maintain (keep updating) Health.
+        // Any changes in health must be handled in PlayerController before entering this function.
+        while (health_index != playerController.Lives)
+        {
+            if (playerController.Lives < health_index)
+            {
+                health_index--;
+                healthbar[health_index].renderer.enabled = false;
+            }
+            else if (playerController.Lives > health_index)
+            {
+                healthbar[health_index].renderer.enabled = true;
+                health_index++;
+            }
         }
     }
+
     void DisplayMode()
     {
         switch (playerController.CurrentMode)
