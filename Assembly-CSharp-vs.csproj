@@ -48,6 +48,7 @@
   <ItemGroup>
      <Compile Include="Assets\Scripts\Constant.cs" />
      <Compile Include="Assets\Scripts\DetectTiles.cs" />
+     <Compile Include="Assets\Scripts\ENEMIES\CrazyZombie.cs" />
      <Compile Include="Assets\Scripts\ENEMIES\Enemy.cs" />
      <Compile Include="Assets\Scripts\ENEMIES\Zombie.cs" />
      <Compile Include="Assets\Scripts\Game.cs" />
@@ -60,6 +61,7 @@
      <Compile Include="Assets\Scripts\Shooter.cs" />
      <Compile Include="Assets\Scripts\TileGenerator.cs" />
      <Compile Include="Assets\Scripts\Turret.cs" />
+     <Compile Include="Assets\Scripts\WaveController.cs" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
