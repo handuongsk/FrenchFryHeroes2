@@ -4,7 +4,6 @@ using System.Collections.Generic;
 
 public class TileGenerator : MonoBehaviour {
 
-
 	public Object[] tileType;
     private int[,] tileMap;
     static int gameWidth;
@@ -44,7 +43,7 @@ public class TileGenerator : MonoBehaviour {
 		{
 			for (int x = 0; x < gameWidth; x++)
 			{
-                Debug.Log(x + " " + y);
+                //Debug.Log(x + " " + y);
 				//int tileVal = Random.Range (0,tileType.Length); //random generate a tile from 0-Length-1 inclusive
 				Instantiate(tileType[tileMap[y, x]], new Vector3(x - gameWidth/2, y - gameHeight/2, 0), Quaternion.identity);
 			}

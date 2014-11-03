@@ -2,6 +2,7 @@
 using System.Collections;
 
 public class Enemy : MonoBehaviour {
+	public GameObject[] drop;
 	public float health;
 	public GameObject player;
 
@@ -14,6 +15,11 @@ public class Enemy : MonoBehaviour {
 	// Is called by Animation Event at end of ZombieDead animation
 	protected void DeleteObject()
 	{
+		//drop an item.
+		GameObject item = Instantiate(drop[Random.Range(0,drop.Length)], transform.position, Quaternion.identity) as GameObject;
+		item.GetComponent<ItemController>().Amount = 10;
+
+
 		Destroy (this.gameObject);
 	} // void DeleteObject()
 	
@@ -58,7 +64,7 @@ public class Enemy : MonoBehaviour {
 	
 	void OnTriggerEnter2D(Collider2D other)
 	{
-		if (other.gameObject.tag == "Bullet") {
+		if (other.tag == "Bullet" && IsAlive()) {
 			BulletController bullet = other.gameObject.GetComponent<BulletController>();
 			if ((health -= bullet.Damage) <= 0)
 			{
@@ -70,7 +76,7 @@ public class Enemy : MonoBehaviour {
 			} // else
 			bullet.Deactivate();
 
-		} // if (other.gameObject.tag == "Bullet") {
+		} // if (other.tag == "Bullet") {
 
 	} // void OnTriggerEnter2D(Collider2D other)
 
