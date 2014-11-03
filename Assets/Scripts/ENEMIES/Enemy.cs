@@ -50,7 +50,7 @@ public class Enemy : MonoBehaviour {
 		return health > 0;
 	} // public bool IsAlive()
 
-	void Knockback(BulletController other)
+	protected virtual void Knockback(BulletController other)
 	{
 		float rotz = Mathf.Atan2 ((other.transform.position.y - transform.position.y),
 		                          (other.transform.position.x - transform.position.x)) *
@@ -66,19 +66,22 @@ public class Enemy : MonoBehaviour {
 	{
 		if (other.tag == "Bullet" && IsAlive()) {
 			BulletController bullet = other.gameObject.GetComponent<BulletController>();
-			if ((health -= bullet.Damage) <= 0)
-			{
-				Die ();
-			}//if ((health -= bullet.Damage) <= 0)
-			else
-			{
-				Knockback(bullet);
-			} // else
-			bullet.Deactivate();
-
+			GetHit(bullet);
 		} // if (other.tag == "Bullet") {
 
 	} // void OnTriggerEnter2D(Collider2D other)
+	
+	protected virtual void GetHit(BulletController bullet) {
+		if ((health -= bullet.Damage) <= 0)
+		{
+			Die ();
+		}//if ((health -= bullet.Damage) <= 0)
+		else
+		{
+			Knockback(bullet);
+		} // else
+		bullet.Deactivate();
+	}
 
 	protected virtual void VAwake () {
 		Awake ();
