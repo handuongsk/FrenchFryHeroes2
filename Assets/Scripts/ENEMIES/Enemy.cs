@@ -69,7 +69,9 @@ public class Enemy : MonoBehaviour {
 				Knockback(bullet);
 			} // else
 			bullet.Deactivate();
+
 		} // if (other.gameObject.tag == "Bullet") {
+
 	} // void OnTriggerEnter2D(Collider2D other)
 
 	protected virtual void VAwake () {

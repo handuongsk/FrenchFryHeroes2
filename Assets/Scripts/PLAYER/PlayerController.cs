@@ -62,6 +62,14 @@ public class PlayerController : MonoBehaviour {
 		transform.rotation = Quaternion.Euler(0, 0, rotZ-90);
 	}
 
+    void OnTriggerEnter2D(Collider2D other)
+    {
+        if (other.gameObject.tag == "Enemy")
+        {
+            lives--;
+        }
+    }
+
     void HandleInput()
     {
 
@@ -78,6 +86,7 @@ public class PlayerController : MonoBehaviour {
                 // Debug.Log("COMBAT MODE ENABLED");
             }
         }
+
     }
 
 
@@ -87,7 +96,10 @@ public class PlayerController : MonoBehaviour {
 		set { gameMode = value; }
 	}
 
-    public int Lives { get { return lives; } } 
+    public int Lives { 
+        get { return lives; }
+        set { lives = value; }
+    } 
     public int Ammo { get { return ammo; } }
     public int Metal { get { return metal; } }
     public int Wood { get { return wood; } }
