@@ -32,18 +32,16 @@ public class Turret : MonoBehaviour {
 	void ScanSurround()
 	{
 		allEnemies = GameObject.FindGameObjectsWithTag("Enemy");
-		foreach (GameObject enemy in allEnemies)
-		{
-			if (enemy.GetComponent<Enemy> ().IsAlive())
-			{
+		foreach (GameObject enemy in allEnemies) {
+			if (enemy.GetComponent<Enemy> ().IsAlive ()) {
 				Vector3 difference = (enemy.transform.position - transform.position);
 				float distance = difference.sqrMagnitude;
-				
-				if (distance <= minDistance)
-				{
-					target = enemy.GetComponent<Enemy> ();
+
+				if (distance <= minDistance) {
+						target = enemy.GetComponent<Enemy> ();
 				}
 			} // if (enemy.GetComponent<Enemy> ().IsAlive())
 		}
+
 	}
 }

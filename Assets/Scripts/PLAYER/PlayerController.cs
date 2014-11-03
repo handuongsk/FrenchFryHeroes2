@@ -37,6 +37,7 @@ public class PlayerController : MonoBehaviour {
 		HandleAnimation ();
 		HandleRotation ();
 		HandleMovement ();
+		HandleScreenBoundary ();
 	}
 
 	void HandleAnimation()
@@ -62,12 +63,52 @@ public class PlayerController : MonoBehaviour {
 		transform.rotation = Quaternion.Euler(0, 0, rotZ-90);
 	}
 
+	void HandleScreenBoundary ()
+	{
+		Camera mainCamera = Camera.main;
+		Vector3 cameraPosition = mainCamera.transform.position;
+		Vector3 currentPosition = transform.position;
+		Vector3 newPosition = transform.position; 
+		
+		float xMax = cameraPosition.x + Constant.SCREEN_WIDTH_HALF - renderer.bounds.size.x / 2;
+		float xMin = cameraPosition.x - Constant.SCREEN_WIDTH_HALF + renderer.bounds.size.x / 2;
+		float yMax = cameraPosition.y + Constant.SCREEN_HEIGHT_HALF - renderer.bounds.size.y / 2;
+		float yMin = cameraPosition.y - Constant.SCREEN_HEIGHT_HALF + renderer.bounds.size.y / 2;
+		
+		// Detects if the user is out of bounds for each coordinate.
+		// If so, it moves the user to the nearest boundary.
+		if (currentPosition.x < xMin || currentPosition.x > xMax) {
+			newPosition.x = Mathf.Clamp(currentPosition.x, xMin, xMax );
+		} // if (currentPosition.x < xMin || currentPosition.x > xMax)
+		if (currentPosition.y < yMin || currentPosition.y > yMax) {
+			newPosition.y = Mathf.Clamp( currentPosition.y, yMin, yMax );
+		} // if (currentPosition.y < yMin || currentPosition.y > yMax)
+		
+		transform.position = newPosition;
+	} // void HandleScreenBoundary ()
+
+	void HurtAnimationEnd () {
+		Animator anim = GetComponent<Animator> ();
+		anim.SetBool ("IsAttacked", false);
+	}
+
+	void IsAttacked() {
+		//Lets place some game ending code here, in case lives = 0 ...
+        lives--;
+		
+		Animator anim = GetComponent<Animator> ();
+		 anim.SetBool ("IsAttacked", true);
+	}
+
     void OnTriggerEnter2D(Collider2D other)
     {
-        if (other.gameObject.tag == "Enemy")
-        {
-            lives--;
-        }
+        if (other.tag == "Enemy") {
+			IsAttacked ();
+			wood += 5;
+		} 
+		/*else if (other.tag == "Item") {
+			Debug.Log("i loot you");
+		}*/
     }
 
     void HandleInput()
@@ -86,7 +127,6 @@ public class PlayerController : MonoBehaviour {
                 // Debug.Log("COMBAT MODE ENABLED");
             }
         }
-
     }
 
 
@@ -104,5 +144,24 @@ public class PlayerController : MonoBehaviour {
     public int Metal { get { return metal; } }
     public int Wood { get { return wood; } }
     public int Copper { get { return copper; } }
+
+	public void giveItem(ItemController.ItemType type, int amount) {
+		switch (type) {
+			case ItemController.ItemType.AMMO:
+				ammo += amount;
+				break;
+			case ItemController.ItemType.COPPER:
+				copper += amount;
+				break;
+			case ItemController.ItemType.METAL:
+				metal += amount;
+				break;
+			case ItemController.ItemType.WOOD:
+				wood += amount;
+				break;
+			default:
+				break;
+		}
+	}
 
 }
